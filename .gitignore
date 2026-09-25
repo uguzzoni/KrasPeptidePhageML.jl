@@ -5,8 +5,6 @@ data/*.jld2
 !data/model_nn_2l.jld2
 
 config/paths.toml
-STATUS.md
-WORKPLAN.md
 Manifest.toml
 # Only the compact perturbation artifact is committed (~200 KB). Models written
 # by scripts/01_train.jl land in results/ too and stay out of git.
@@ -15,7 +13,4 @@ Manifest.toml
 figures/*.png
 figures/*.pdf
 .ipynb_checkpoints/
-src/generate.jl
-scripts/02_generate.jl
 # and its output, which nothing in the public repo produces
-results/candidates.csv
