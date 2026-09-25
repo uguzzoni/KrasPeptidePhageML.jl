@@ -1,0 +1,18 @@
+# --- data ---------------------------------------------------------------------
+# The dataset (data/lung_counts.csv ~9 MB, data/lung_samples.csv) IS committed;
+# see data/README.md for how it was produced.
+data/*.jld2
+!data/model_nn_2l.jld2
+
+config/paths.toml
+STATUS.md
+Manifest.toml
+# Only the compact perturbation artifact is committed (~200 KB). Models written
+# by scripts/01_train.jl land in results/ too and stay out of git.
+*.jld2
+!results/perturbations.jld2
+figures/*.png
+figures/*.pdf
+.ipynb_checkpoints/
+src/generate.jl
+scripts/02_generate.jl
