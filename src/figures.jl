@@ -40,7 +40,7 @@ row 1 uses every fraction, row 2 the `frac == 1` bootstrap, row 3 the CV folds.
 """
 function load_perturbations(; path = joinpath(repo_root(), "results", "perturbations.jld2"))
     isfile(path) || error("perturbation results not found: $path\n" *
-                          "run scripts/03_perturbations.jl, or use the committed copy in results/")
+                          "run scripts/02_perturbations.jl, or use the committed copy in results/")
     d = JLD2.load(path)
     return (sequence = d["sequence"], E_reference = d["E_reference"], runs = d["runs"])
 end

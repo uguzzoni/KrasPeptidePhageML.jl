@@ -1,10 +1,10 @@
 ###############################################################################
-# 03_perturbations.jl — regenerate `results/perturbations.jld2`, the artifact
+# 02_perturbations.jl — regenerate `results/perturbations.jld2`, the artifact
 # the combined figure is drawn from.
 #
-#   julia --project=. scripts/03_perturbations.jl            # all 25 runs, ~3 h
-#   julia --project=. scripts/03_perturbations.jl --schedule pilot --reps 1 --folds 2
-#   julia --project=. scripts/03_perturbations.jl --only cv    # just the folds
+#   julia --project=. scripts/02_perturbations.jl            # all 25 runs, ~3 h
+#   julia --project=. scripts/02_perturbations.jl --schedule pilot --reps 1 --folds 2
+#   julia --project=. scripts/02_perturbations.jl --only cv    # just the folds
 #
 # Two perturbations, both warm-started from the published model:
 #
@@ -41,7 +41,7 @@ resume   = argflag(ARGS, "--resume")
 outfile  = argval(ARGS, "--out", joinpath(repo_root(), "results", "perturbations.jld2");
                   as = String)
 
-@info "03_perturbations" schedule nfolds nreps fracs only outfile resume
+@info "02_perturbations" schedule nfolds nreps fracs only outfile resume
 
 data, df_exp, seqs = load_lung_dataset()
 select, washed = build_select_washed(df_exp)

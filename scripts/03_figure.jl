@@ -1,10 +1,10 @@
 ###############################################################################
-# 04_figure.jl — rebuild the combined 3x3 robustness figure.
+# 03_figure.jl — rebuild the combined 3x3 robustness figure.
 #
-#   julia --project=. scripts/04_figure.jl [--out figures/figure_combined] [--topn 100]
+#   julia --project=. scripts/03_figure.jl [--out figures/figure_combined] [--topn 100]
 #
 # Reads only `results/perturbations.jld2` (committed), so this takes seconds and
-# needs no training. Regenerate that file with scripts/03_perturbations.jl.
+# needs no training. Regenerate that file with scripts/02_perturbations.jl.
 ###############################################################################
 
 using KrasPeptidePhageML, Printf

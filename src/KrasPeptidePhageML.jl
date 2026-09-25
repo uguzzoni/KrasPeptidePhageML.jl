@@ -3,7 +3,8 @@
 
 An implementation of the phage-display selection model used for
 KRAS-mutant-specific peptide discovery as described in Uguzzoni et al. (2026): 
-import counts from CSV, fit the model, generate candidate peptides, and evaluate stability.
+import counts from CSV, fit the model, score peptides, and evaluate the
+stability of the published analysis.
 
 
 Quick start:
@@ -52,13 +53,11 @@ export AA2INT, INT2AA, AAs, str2seq, seq2str, sample2hot, onehot2aa, aa2onehot
 export read_counts_csv, read_samples_csv
 export load_lung_dataset, build_select_washed, MODES, MODE_NAMES
 
-# ---- model construction, training, generation ------------------------------
+# ---- model construction and training ---------------------------------------
 export mode_nn, build_model, build_warm_model, flat_model
 export load_model, load_reference_model, panel_energies
 export l2_nn, learn!, train_model!
 export DEFAULT_SCHEDULE, WARM_SCHEDULE, PILOT_SCHEDULE
-export generate_candidates, GenerationSpec, default_specs, energy_thresholds
-export run_chains, select_candidates
 
 # ---- evaluation and figures ------------------------------------------------
 export pooled_enrichment, pooled_abundance, predictive_logloss, resample_counts
@@ -84,7 +83,6 @@ include("import_data.jl")
 # Modelling workflow.
 include("build.jl")
 include("train.jl")
-#include("generate.jl")
 include("metrics.jl")
 include("labels.jl")
 include("figures.jl")

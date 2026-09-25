@@ -6,7 +6,7 @@
 # mistake cannot pass silently.
 #
 # Tests needing the data are skipped (not failed) when it is not available, so
-# `Pkg.test()` works on a checkout without it — see `data/README.md`.
+# `Pkg.test()` works on a checkout without it.
 ###############################################################################
 
 using Test
@@ -200,41 +200,5 @@ HAVE_COUNTS || @warn "data CSVs not found — the import golden test will be ski
         svg = read("$out.svg", String)
         @test occursin("id=\"glyph", svg)
         @test !occursin("<text", svg)
-    end
-
-    # -------------------------------------------------------------- generation
-    @testset "generation" begin
-        data, df_exp, _ = load_lung_dataset()
-        model = load_reference_model()
-        spec = GenerationSpec(strategy = :pareto2, mode = :mutation, n_chains = 6, seed = 3)
-
-        # REPRODUCIBILITY. The vendored MC kernel draws from the global RNG, so
-        # `run_chains` seeds it (see generate.jl). Before that, two calls with the
-        # same spec gave different sequences. Perturbing the global stream between
-        # the calls is the point of the `rand()` below — it must not matter.
-        _, r1 = run_chains(model, spec)
-        rand(1000)
-        _, r2 = run_chains(model, spec)
-        @test size(r1) == size(r2)
-        @test r1 == r2
-        @test run_chains(model, GenerationSpec(strategy = :pareto2, mode = :mutation,
-                                               n_chains = 6, seed = 4))[2] != r2
-
-        # Valid 7-mers over the 20-letter alphabet.
-        @test size(r1, 1) == 20 && size(r1, 2) == 7
-        @test all(sum(r1; dims = 1) .== 1)
-        strs = [onehot2aa(r1[:, :, k]) for k in axes(r1, 3)]
-        @test all(length(s) == 7 for s in strs)
-        @test all(all(c in AAs for c in s) for s in strs)
-
-        # Candidates land in the quadrant their strategy aimed at: the Pareto
-        # blocks optimise positive+mutation, so selected peptides must beat the
-        # thresholds on both.
-        E_thr = energy_thresholds(model, data; n = 2000, rng = MersenneTwister(1))
-        E = Float64.(energies(r1, model))
-        idx = select_candidates(E, E_thr, :pareto2, :mutation)
-        @test all(E[idx, MODES[:positive]] .< E_thr[MODES[:positive]])
-        @test all(E[idx, MODES[:mutation]] .< E_thr[MODES[:mutation]])
-        @test all(E[idx, MODES[:wt]] .> E_thr[MODES[:wt]])
     end
 end

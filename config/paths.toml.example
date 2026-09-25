@@ -5,8 +5,6 @@
 # the package at data kept elsewhere. Relative paths resolve against the
 # repository root; every key can also be overridden by an environment variable or
 # by a function argument — see `src/paths.jl` for the precedence rules.
-#
-# See `data/README.md` for the format each file must have.
 
 # Counts table: `sequence` + one integer column per tree node. Column 1 after
 # `sequence` is the root (initial library), the rest are the 32 rounds in the

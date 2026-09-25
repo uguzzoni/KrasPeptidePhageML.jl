@@ -11,7 +11,7 @@
 #
 # This will not land on the published optimum. The original used a longer
 # multi-phase schedule that was not recorded in full, and `learn!` here carries
-# the corrected regulariser (see NOTES_provenance.md), so the trajectory differs
+# the corrected regulariser, so the trajectory differs
 # from the start. What the run is for: an independent fit to compare against.
 ###############################################################################
 

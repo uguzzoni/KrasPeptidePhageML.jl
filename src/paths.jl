@@ -72,8 +72,7 @@ function data_path(key::Symbol; override = nothing)
             1. the `override` argument,
             2. the environment variable $(something(envvar, "—")),
             3. `$(config_file())` as   $(key) = "/abs/path/to/file"
-          Copy `config/paths.toml.example` to `config/paths.toml` to get started;
-          `data/README.md` explains which file each key expects.
+          Copy `config/paths.toml.example` to `config/paths.toml` to get started.
           """)
 end
 
